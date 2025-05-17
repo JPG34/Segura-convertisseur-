@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Convertisseur Seyura</title>
+  <style>
+    body { font-family: sans-serif; background: #111; color: #fff; padding: 20px; }
+    textarea, button { width: 100%; margin: 10px 0; padding: 10px; font-size: 16px; border-radius: 5px; }
+    textarea { height: 100px; background: #222; color: white; border: none; resize: none; }
+    button { background: #444; color: white; border: none; cursor: pointer; }
+    button:hover { background: #666; }
+    h1 { text-align: center; }
+  </style>
+</head>
+<body>
+  <h1>Convertisseur Seyura</h1>
+  <label>Texte en lettres :</label>
+  <textarea id="inputText" placeholder="Ex : SALUT TU VAS BIEN"></textarea>
+  <button onclick="toGlyphs()">→ Traduire en glyphes</button>
+  <textarea id="glyphOutput" readonly></textarea>
+
+  <label>Texte en glyphes :</label>
+  <textarea id="inputGlyphs" placeholder="Ex : @△Λ⊖Ϡ ▭⊖ @△Ϡ Ɔ⦾ ℧"></textarea>
+  <button onclick="toLetters()">→ Traduire en lettres</button>
+  <textarea id="letterOutput" readonly></textarea>
+
+  <script>
+    const map = {
+      "A": "△", "B": "⊂", "C": "Ↄ", "D": "◇", "E": "Ɔ", "F": "Ϭ",
+      "G": "Ϙ", "H": "Ш", "I": "⦾", "J": "Ϟ", "K": "Ϟ", "L": "Λ",
+      "M": "☐", "N": "℧", "O": "◯", "P": "Ͽ", "Q": "Ϙ", "R": "∂",
+      "S": "@", "T": "Ϡ", "U": "⊖", "V": "▭", "W": "W", "X": "Ͻ",
+      "Y": "ϒ", "Z": "Ƶ"
+    };
+    const reverseMap = Object.fromEntries(Object.entries(map).map(([k, v]) => [v, k]));
+    function toGlyphs() {
+      const input = document.getElementById("inputText").value.toUpperCase();
+      let output = "";
+      for (let char of input) output += map[char] || char;
+      document.getElementById("glyphOutput").value = output;
+    }
+    function toLetters() {
+      const input = document.getElementById("inputGlyphs").value;
+      let output = "";
+      for (let char of input) output += reverseMap[char] || char;
+      document.getElementById("letterOutput").value = output;
+    }
+  </script>
+</body>
+</html>
