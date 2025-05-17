@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
   <title>Convertisseur Seyura</title>
   <style>
     body {
@@ -11,10 +10,10 @@
       color: #fff;
       padding: 20px;
     }
-    input[type="text"], textarea, button {
+    textarea, button {
       width: 100%;
-      margin: 10px 0;
       padding: 10px;
+      margin: 10px 0;
       font-size: 16px;
       border-radius: 5px;
     }
@@ -37,35 +36,35 @@
   </style>
 </head>
 <body>
-
   <h1>Convertisseur Seyura</h1>
 
   <label>Phrase en français (MAJUSCULES uniquement) :</label>
-  <textarea id="inputText" placeholder="EX : SALUT COMMENT TU VAS ?"></textarea>
+  <textarea id="letterInput" placeholder="EX : BONJOUR COMMENT ÇA VA ?"></textarea>
   <button onclick="toGlyphs()">Traduire en glyphes</button>
+
   <label>Phrase en glyphes :</label>
   <textarea id="glyphOutput" readonly></textarea>
 
   <label>Texte en glyphes :</label>
-  <textarea id="inputGlyphs" placeholder="EX : §ↃЯ⊥€ Ↄ⊕₥₥€∏⊥ ⊥∩ √∆§ ?"></textarea>
+  <textarea id="inputGlyphs" placeholder="EX : ⊖⊕Ↄ..."></textarea>
   <button onclick="toLetters()">Traduire en lettres</button>
+
   <label>Texte déchiffré :</label>
   <textarea id="letterOutput" readonly></textarea>
 
   <script>
     const glyphMap = {
-      A: "△", B: "ß", C: "ʊ", D: "◇", E: "Ↄ", F: "Ϩ", G: "⊙", H: "Ш", I: "ᑄ",
-      J: "¿", K: "Ҥ", L: "Λ", M: "◻", N: "ʊ", O: "◎", P: "ↄ", Q: "Ϙ", R: "ə",
-      S: "@", T: "ท", U: "ɵ", V: "▭", W: "W", X: "Ↄ", Y: "Ϥ", Z: "Z"
+      A: "△", O: "◎", I: "<", C: "ʊ", G: "Б", Q: "Ϙ", K: "ʞ", E: "ɔ", S: "@",
+      D: "◇", M: "▭", W: "ɯ", L: "▯", Y: "Λ", H: "Ɏ", U: "Ш", X: "ə", V: "ↄ",
+      Z: "ᔓ", F: "Ṩ", T: "ⅎ", N: "†", R: "∩", P: "ɚ"
     };
-
     const reverseMap = {};
     for (const letter in glyphMap) {
       reverseMap[glyphMap[letter]] = letter;
     }
 
     function toGlyphs() {
-      const input = document.getElementById("inputText").value.toUpperCase();
+      const input = document.getElementById("letterInput").value.toUpperCase();
       let output = "";
       for (let char of input) {
         output += glyphMap[char] || char;
